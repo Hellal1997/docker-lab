@@ -1,3 +1,16 @@
+
+# Stage 1: Build the React application
+FROM node:8.15.1-alpine as build-stage
+
+# Set the working directory in the container
+WORKDIR /usr/src/app
+
+# Copy package.json and package-lock.json
+COPY package*.json ./
+
+# Install dependencies
+RUN npm --verbose install
+
 # Copy the rest of the application code
 COPY . .
 
@@ -16,5 +29,3 @@ EXPOSE 80
 
 # Start Nginx
 CMD ["nginx", "-g", "daemon off;"]
-
-
