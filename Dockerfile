@@ -1,7 +1,7 @@
 # Dockerfile
 
 # Step 1: Build the React app
-FROM node:18 AS build
+FROM node AS build
 
 # Set working directory
 WORKDIR /app
