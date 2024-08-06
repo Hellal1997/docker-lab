@@ -1,18 +1,20 @@
-# Use the official Node.js image from the Docker Hub
-FROM node:14
-
-# Create and change to the app directory
-WORKDIR /usr/src/app
-
-# Copy the application code to the container
+# Copy the rest of the application code
 COPY . .
 
-# Install dependencies
-RUN npm install
+# Build the React application
+RUN npm run build
+RUN npm install --force
 
-# Expose the port the app runs on
-EXPOSE 8080
+# Stage 2: Serve the React application using a lightweight web server
+FROM nginx:alpine
 
-# Run the application
-CMD ["node", "app.js"]
+# Copy the build artifacts from the build stage
+#COPY --from=build /app/build /usr/share/nginx/index.html
+
+# Expose port 80 to access the application
+EXPOSE 80
+
+# Start Nginx
+CMD ["nginx", "-g", "daemon off;"]
+
 
