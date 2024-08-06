@@ -1,31 +1,30 @@
+# Dockerfile
 
-# Stage 1: Build the React application
-FROM node:8.15.1-alpine as build-stage
+# Step 1: Build the React app
+FROM node:18 AS build
 
-# Set the working directory in the container
-WORKDIR /usr/src/app
-
-# Copy package.json and package-lock.json
-COPY package*.json ./
+# Set working directory
+WORKDIR /app
 
 # Install dependencies
-RUN npm --verbose install
+COPY package.json package-lock.json ./
+RUN npm install
 
-# Copy the rest of the application code
+# Copy the app source code
 COPY . .
 
-# Build the React application
+# Build the app
 RUN npm run build
-RUN npm install --force
 
-# Stage 2: Serve the React application using a lightweight web server
+# Step 2: Serve the app with Nginx
 FROM nginx:alpine
 
-# Copy the build artifacts from the build stage
-#COPY --from=build /app/build /usr/share/nginx/index.html
+# Copy built React app from the build stage
+COPY --from=build /app/build /usr/share/nginx/html
 
-# Expose port 80 to access the application
+# Expose port 80
 EXPOSE 80
 
 # Start Nginx
 CMD ["nginx", "-g", "daemon off;"]
+
