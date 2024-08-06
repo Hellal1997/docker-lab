@@ -1,0 +1,21 @@
+// src/components/MovieList.js
+import React from 'react';
+
+const movies = [
+  { id: 1, title: 'Inception', director: 'Christopher Nolan', year: 2010 },
+  { id: 2, title: 'Interstellar', director: 'Christopher Nolan', year: 2014 },
+  { id: 3, title: 'King Kong', director: 'Peter Jackson', year: 2005 }
+];
+
+const MovieList = () => (
+  <div>
+    <h1>Movie List</h1>
+    <ul>
+      {movies.map(movie => (
+        <li key={movie.id}>{movie.title} - {movie.director} ({movie.year})</li>
+      ))}
+    </ul>
+  </div>
+);
+
+export default MovieList;
