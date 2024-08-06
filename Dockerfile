@@ -1,21 +1,12 @@
-# Use the official Node.js image as the base image
-FROM node:14
+# Dockerfile
+FROM nginx
 
-# Create and change to the app directory
-WORKDIR /app
+COPY nginx.config /etc/nginx/nginx.config
 
-# Copy package.json and package-lock.json
-COPY package*.json ./
+RUN rm -rf /usr/share/nginx/html/*
 
-# Install dependencies
-RUN npm install
+COPY html /usr/share/nginx/html
 
-# Copy the rest of the application files
-COPY . .
-
-# Expose the port the app runs on
 EXPOSE 8080
-
-# Start the application
-CMD ["npm", "start"]
-
+ 
+CMD ["nginx", "-g", "daemon off;"]
