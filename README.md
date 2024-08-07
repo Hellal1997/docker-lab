@@ -1,3 +1,29 @@
+To run this :
+1- curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh
+2- curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+3- source ~/.bashrc
+4- nvm list-remote
+#install version 16 
+5- nvm install v16.14.0
+#install nvm lts
+6- nvm install lts/fermium
+# can show your version 
+7- node -v 
+then ;
+#For example, you can create a new React application using create-react-app:
+8- npx create-react-app my-app
+#If you have locally installed packages, you can run their executables using npx. For example, if you have eslint installed locally:
+9-npx eslint .
+then;
+download packages and run to 
+
+Local:            http://localhost:3000
+  On Your Network:  http://192.168.0.113:3000
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+
+
 # docker-lab
 1- Problem 1:
 * Run a container nginx with name my-nginx and attach a and attach a volume 2 volumes to the container
