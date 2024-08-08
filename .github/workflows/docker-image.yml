@@ -34,5 +34,5 @@ jobs:
     - name: Push the Docker image
       run: |
         IMAGE_TAG=my-image-name:mohamedhellal$(date +%s)
-        docker push $IMAGE_TAG
+        docker push $latest
 
