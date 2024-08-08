@@ -1,3 +1,4 @@
+
 name: Docker Image CI
 
 on:
@@ -8,11 +9,26 @@ on:
 
 jobs:
 
-  build:
-
+  build-container:
+    name: Build Docker container image
     runs-on: ubuntu-latest
 
     steps:
+    - name: Checkout code
     - uses: actions/checkout@v4
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+    - uses: docker/build-push-actions/checkout@v4
+     -run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+     -with:
+        username: ${{ github.actor }}
+        password: ${{ secrets.github_TOKEN }}
+        regisrty: docker.pkg.github.com
+        repository: ${{ github.repository }}/next
+        tags : latest, ${{ github.run_number }}
+    - name: publish to Docker Hub
+      uses: docker/build-push-actions/checkout@v4
+      with:
+        username: ${{ secrets.Docker_USERNAME }}
+        password: ${{ secrets.Docker_PASSWORD }}
+        repository: seesharprun/next
+        tags: latest, ${{ github.run_number }}
