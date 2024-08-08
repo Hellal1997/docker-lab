@@ -10,7 +10,7 @@ on:
 jobs:
 
   build-container:
-    name: Build Docker container image
+    
     runs-on: ubuntu-latest
 
     steps:
