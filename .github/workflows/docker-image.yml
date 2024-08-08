@@ -26,13 +26,13 @@ jobs:
     - name: Build the Docker image
       run: |
         IMAGE_TAG=my-image-name:mohamedhellal$(date +%s)
-        docker build . --file Dockerfile --tag $IMAGE_TAG
+        docker build . https://hub.docker.com/repository/docker/mohamedhellal/my-image/general
 
     - name: List Docker images
       run: docker images
 
     - name: Push the Docker image
       run: |
-        IMAGE_TAG=my-image:mohamedhellal$(date +%s)
+        latest=my-image:mohamedhellal$(date +%s)
         docker push mohamedhellal/my-image:latest
 
